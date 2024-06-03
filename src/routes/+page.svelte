@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { invalidate } from "$app/navigation";
+    import url from "$lib/url";
     import CardWrapper from "$lib/CardWrapper.svelte";
 
     export let data;
@@ -8,14 +8,15 @@
     onMount(() => {
         const interval = setInterval(() => {
             invalidate("data:rankings");
-        }, 5000);
+        }, 300 * 1000); // 5 minutes
 
         return () => {
             clearInterval(interval);
         };
     });
 
-    $: user = data.rankings.find((u) => u.user_id === 1023489);
+    $: username = $url.hash.substring(1).toLowerCase() || "respektive";
+    $: user = data.rankings.find((u) => u.username.toLowerCase() === username);
     $: rankings = data.rankings;
 </script>
 
