@@ -15,7 +15,7 @@
         };
     });
 
-    $: username = $url.hash.substring(1).toLowerCase();
+    $: username = decodeURIComponent($url.hash.substring(1).toLowerCase());
     $: user = username ? data.rankings.find((u) => u.username.toLowerCase() === username) : null;
     $: rankings = data.rankings;
 </script>
