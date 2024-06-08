@@ -48,12 +48,12 @@
         margin-left: 1em;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
 
     #rank {
         position: absolute;
-        font-size: 14em;
+        font-size: 12em;
         font-weight: bold;
         opacity: 35%;
         right: 1%;
@@ -61,13 +61,13 @@
     }
 
     #username {
-        font-size: 10em;
+        font-size: 6em;
         font-weight: bold;
         filter: drop-shadow(0.05em 0.05em 0.05em rgba(0, 0, 0, 0.5));
     }
 
     #gained {
-        font-size: 8em;
+        font-size: 6em;
         font-weight: bold;
         filter: drop-shadow(0.05em 0.05em 0.05em rgba(0, 0, 0, 0.5));
     }
