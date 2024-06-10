@@ -8,7 +8,7 @@
     onMount(() => {
         const interval = setInterval(() => {
             invalidate("data:rankings");
-        }, 300 * 1000); // 5 minutes
+        }, 60 * 1000); // 1 minute
 
         return () => {
             clearInterval(interval);

@@ -1,29 +1,19 @@
 import csvToJson from "convert-csv-to-json";
 
 export async function getRankings() {
-    const csv = await fetch(
-        "https://docs.google.com/spreadsheets/d/1DVJcFkyHP3dRsJdaKjz2EwWTNBcJVrO1_Eg3A9r6Szc/export?format=csv&id=1DVJcFkyHP3dRsJdaKjz2EwWTNBcJVrO1_Eg3A9r6Szc&gid=0"
-    );
-
-    const csv_string = await csv.text();
-    const json = csvToJson
-        .indexHeader(1)
-        .fieldDelimiter(",")
-        .supportQuotedField(true)
-        .formatValueByType(true)
-        .csvStringToJson(csv_string);
+    const res = await fetch("https://respektive.pw/scorecamp/");
+    const json = await res.json();
 
     const data = json.map((row) => {
         return {
-            username: row.Username,
-            user_id: row.UserID,
-            score_at_start: parseInt(row.ScoreatStart.replaceAll(",", "")),
-            current_score: parseInt(row.currentelim.replaceAll(",", "")),
-            gained_score:
-                parseInt(row.currentelim.replaceAll(",", "")) -
-                parseInt(row.ScoreatStart.replaceAll(",", "")),
+            username: row.username,
+            user_id: row.user_id,
+            score_at_start: row.starting_ranked_score,
+            current_score: row.ranked_score,
+            gained_score: row.gained_score,
         };
     });
+
     const rankings = data
         .sort((a, b) => b.gained_score - a.gained_score)
         .map((u, i) => {
