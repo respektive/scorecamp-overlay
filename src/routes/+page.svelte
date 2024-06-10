@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import url from "$lib/url";
+    import { invalidate } from "$app/navigation";
     import CardWrapper from "$lib/CardWrapper.svelte";
 
     export let data;
