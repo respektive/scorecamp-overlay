@@ -2,7 +2,7 @@
     export let user;
 </script>
 
-<div class="card">
+<div class="card" style="--card-hue: {(user.gained_score / 1000000) % 360};">
     <div id="avatar" style="background-image: url(https://a.ppy.sh/{user.user_id});" />
     <div class="stats">
         <p id="username">{user.username}</p>
@@ -30,12 +30,17 @@
     }
 
     .card {
+        --card-hue: 200;
         position: relative;
         width: 100%;
         max-width: 1200px;
         max-height: 300px;
         aspect-ratio: 4/1;
-        background-image: linear-gradient(180deg, hsl(200, 40%, 30%), hsl(200, 40%, 20%));
+        background-image: linear-gradient(
+            180deg,
+            hsl(var(--card-hue), 60%, 30%),
+            hsl(var(--card-hue), 60%, 20%)
+        );
         font-size: calc(min(100vw, 1200px) / 100);
         border-radius: 4em;
         color: white;
