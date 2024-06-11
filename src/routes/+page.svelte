@@ -3,13 +3,17 @@
     import url from "$lib/url";
     import { invalidate } from "$app/navigation";
     import CardWrapper from "$lib/CardWrapper.svelte";
+    import { dev } from '$app/environment';
 
     export let data;
+
+    // 10 seconds in dev mode, 60 secs in prod
+    const REFRESH_INTERVAL = (dev ? 10 : 60) * 1000;
 
     onMount(() => {
         const interval = setInterval(() => {
             invalidate("data:rankings");
-        }, 60 * 1000); // 1 minute
+        }, REFRESH_INTERVAL); // 1 minute
 
         return () => {
             clearInterval(interval);

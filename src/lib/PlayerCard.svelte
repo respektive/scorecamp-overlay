@@ -1,13 +1,25 @@
 <script>
+    import { tweened } from 'svelte/motion';
+    import { derived } from 'svelte/store';
+    import { tweenSettings } from '$lib/constants';
+
+    const gainedScoreNumber = tweened(0, tweenSettings);
+    const gainedScore = derived(gainedScoreNumber, ($gainedScoreNumber) => Math.round($gainedScoreNumber).toLocaleString("en-US"));
+
+    const cardHue = tweened(0, tweenSettings);
+
+    $: gainedScoreNumber.set(user.gained_score);
+    $: cardHue.set((user.gained_score / 1000000) % 360);
+
     export let user;
 </script>
 
-<div class="card" style="--card-hue: {(user.gained_score / 1000000) % 360};">
+<div class="card" style="--card-hue: {$cardHue};">
     <div id="avatar" style="background-image: url(https://a.ppy.sh/{user.user_id});" />
     <div class="stats">
         <p id="username">{user.username}</p>
         <hr />
-        <p id="gained">{user.gained_score.toLocaleString("en-US")}</p>
+        <p id="gained">{$gainedScore}</p>
     </div>
     <p id="rank">#{user.rank}</p>
 </div>
@@ -36,7 +48,7 @@
         max-width: 1200px;
         max-height: 300px;
         aspect-ratio: 4/1;
-        background-image: linear-gradient(
+        background: linear-gradient(
             180deg,
             hsl(var(--card-hue), 60%, 30%),
             hsl(var(--card-hue), 60%, 20%)
