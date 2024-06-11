@@ -3,13 +3,12 @@
     import { derived } from 'svelte/store';
     import { tweenSettings } from '$lib/constants';
 
-    const gainedScoreNumber = tweened(0, tweenSettings);
-    const gainedScore = derived(gainedScoreNumber, ($gainedScoreNumber) => Math.round($gainedScoreNumber).toLocaleString("en-US"));
+    const score = tweened(0, tweenSettings);
 
-    const cardHue = tweened(0, tweenSettings);
+    const gainedScore = derived(score, ($score) => Math.round($score).toLocaleString("en-US"));
+    const cardHue = derived(score, ($score) => ($score / 1000000) % 360);
 
-    $: gainedScoreNumber.set(user.gained_score);
-    $: cardHue.set((user.gained_score / 1000000) % 360);
+    $: score.set(user.gained_score);
 
     export let user;
 </script>
