@@ -73,8 +73,8 @@
         font-size: 12em;
         font-weight: bold;
         opacity: 35%;
-        right: 1%;
-        bottom: -6%;
+        right: 0.2em;
+        bottom: -0.1em;
     }
 
     #username {
