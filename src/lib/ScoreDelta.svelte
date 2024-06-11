@@ -2,14 +2,15 @@
     export let main_user;
     export let compare_user;
 
-    let delta = compare_user.gained_score - main_user.gained_score;
+    let delta = 0;
+    $: delta = compare_user.gained_score - main_user.gained_score;
 </script>
 
 <div class="delta">
     <p id="username">#{compare_user.rank} - {compare_user.username}</p>
     <p id="score">
         {compare_user.gained_score.toLocaleString("en-US")}
-        <span id={delta > 0 ? "positive" : "negative"}>{delta.toLocaleString("en-US")}</span>
+        <span id={delta > 0 ? "positive" : "negative"}>{delta.toLocaleString('en-US')}</span>
     </p>
 </div>
 
