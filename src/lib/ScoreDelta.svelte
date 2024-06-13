@@ -20,11 +20,11 @@
     }
 
     #negative {
-        color: lime;
+        color: hsl(125, 80%, 60%);
     }
 
     #positive {
-        color: red;
+        color: hsl(360, 80%, 60%);
     }
 
     #positive::before {
