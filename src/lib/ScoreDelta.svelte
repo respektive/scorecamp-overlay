@@ -10,7 +10,7 @@
     <p id="username">#{compare_user.rank} - {compare_user.username}</p>
     <p id="score">
         {compare_user.gained_score.toLocaleString("en-US")}
-        <span id={delta > 0 ? "positive" : "negative"}>{delta.toLocaleString('en-US')}</span>
+        <span id={delta > 0 ? "positive" : "negative"}>{delta.toLocaleString("en-US")}</span>
     </p>
 </div>
 
@@ -20,11 +20,11 @@
     }
 
     #negative {
-        color: hsl(125, 80%, 60%);
+        color: hsl(125, 80%, 70%);
     }
 
     #positive {
-        color: hsl(360, 80%, 60%);
+        color: hsl(360, 80%, 70%);
     }
 
     #positive::before {
