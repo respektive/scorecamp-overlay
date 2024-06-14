@@ -1,7 +1,7 @@
 <script>
-    import { tweened } from 'svelte/motion';
-    import { derived } from 'svelte/store';
-    import { tweenSettings } from '$lib/constants';
+    import { tweened } from "svelte/motion";
+    import { derived } from "svelte/store";
+    import { tweenSettings, getRankColour } from "$lib/constants";
 
     const score = tweened(0, tweenSettings);
 
@@ -20,7 +20,7 @@
         <hr />
         <p id="gained">{$gainedScore}</p>
     </div>
-    <p id="rank">#{user.rank}</p>
+    <p id="rank" style="--rank-colour: {getRankColour(user.rank)};">#{user.rank}</p>
 </div>
 
 <style>
@@ -52,7 +52,7 @@
             hsl(var(--card-hue), 60%, 30%),
             hsl(var(--card-hue), 60%, 20%)
         );
-        font-size: calc(min(100vw, 1200px) / 100);
+        font-size: calc(min(100vw, 1200px) / 88);
         border-radius: 4em;
         color: white;
         display: flex;
@@ -68,23 +68,30 @@
     }
 
     #rank {
+        --rank-colour: #bab2ab;
         position: absolute;
         font-size: 12em;
-        font-weight: bold;
-        opacity: 35%;
+        font-weight: 600;
         right: 0.2em;
-        bottom: -0.1em;
+        bottom: 0em;
+        background-image: var(--rank-colour);
+        background-size: 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
     }
 
     #username {
         font-size: 6em;
-        font-weight: bold;
+        font-weight: 600;
         filter: drop-shadow(0.05em 0.05em 0.05em rgba(0, 0, 0, 0.5));
     }
 
     #gained {
         font-size: 6em;
-        font-weight: bold;
+        font-weight: 800;
         filter: drop-shadow(0.05em 0.05em 0.05em rgba(0, 0, 0, 0.5));
     }
 

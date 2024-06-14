@@ -35,7 +35,7 @@
         padding: 1em;
         position: relative;
         font-size: calc(min(100vw, 1200px) / 100);
-        font-weight: bold;
+        font-weight: 800;
         border-radius: 4em;
         color: white;
         display: flex;
