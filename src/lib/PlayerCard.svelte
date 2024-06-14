@@ -81,6 +81,7 @@
         -moz-background-clip: text;
         -webkit-text-fill-color: transparent;
         -moz-text-fill-color: transparent;
+        filter: drop-shadow(0.03em 0.03em 0.03em rgba(0, 0, 0, 0.5));
     }
 
     #username {
