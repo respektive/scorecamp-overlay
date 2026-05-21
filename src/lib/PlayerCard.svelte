@@ -8,19 +8,19 @@
     const gainedScore = derived(score, ($score) => Math.round($score).toLocaleString("en-US"));
     const cardHue = derived(score, ($score) => ($score / 1000000) % 360);
 
-    $: score.set(user.gained_score);
+    $: score.set(team.scoreGained);
 
-    export let user;
+    export let team;
 </script>
 
 <div class="card" style="--card-hue: {$cardHue};">
-    <div id="avatar" style="background-image: url(https://a.ppy.sh/{user.user_id});" />
+    <div id="avatar" style="background-image: url(https://a.ppy.sh/{1});" />
     <div class="stats">
-        <p id="username">{user.username}</p>
+        <p id="username">{team.teamName}</p>
         <hr />
         <p id="gained">{$gainedScore}</p>
     </div>
-    <p id="rank" style="--rank-colour: {getRankColour(user.rank)};">#{user.rank}</p>
+    <p id="rank" style="--rank-colour: {getRankColour(team.rank.replace('#', ''))};">{team.rank}</p>
 </div>
 
 <style>
@@ -32,12 +32,7 @@
         border: 0;
         margin: 0;
         height: 0.1em;
-        background: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0),
-            rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0)
-        );
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
     }
 
     .card {
@@ -47,11 +42,7 @@
         max-width: 1200px;
         max-height: 300px;
         aspect-ratio: 4/1;
-        background: linear-gradient(
-            180deg,
-            hsl(var(--card-hue), 60%, 30%),
-            hsl(var(--card-hue), 60%, 20%)
-        );
+        background: linear-gradient(180deg, hsl(var(--card-hue), 60%, 30%), hsl(var(--card-hue), 60%, 20%));
         font-size: calc(min(100vw, 1200px) / 88);
         border-radius: 4em;
         color: white;

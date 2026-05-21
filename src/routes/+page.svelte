@@ -3,7 +3,7 @@
     import url from "$lib/url";
     import { invalidate } from "$app/navigation";
     import CardWrapper from "$lib/CardWrapper.svelte";
-    import { dev } from '$app/environment';
+    import { dev } from "$app/environment";
 
     export let data;
 
@@ -20,29 +20,75 @@
         };
     });
 
-    $: username = decodeURIComponent($url.hash.substring(1).toLowerCase());
-    $: user = username ? data.rankings.find((u) => u.username.toLowerCase() === username) : null;
-    $: rankings = data.rankings;
+    console.log(data);
+
+    $: teamName = decodeURIComponent($url.hash.substring(1).toLowerCase());
+    $: team = teamName ? data.rankings.find((t) => t.teamName.toLowerCase() === teamName) : null;
+    $: rankings = data.rankings.map((t) => ({
+        ...t,
+        scoreGained: parseInt(String(t.scoreGained).replace(/,/g, "")),
+        currentScore: parseInt(String(t.currentScore).replace(/,/g, "")),
+    }));
 </script>
+
+{#if team}
+    <CardWrapper {team} {rankings} />
+{:else}
+    <table>
+        <th>Rank</th>
+        <th>Team Name</th>
+
+        <th>Current Score</th>
+        <th>Score Gained</th>
+
+        <th>Player 1</th>
+        <th>Player 2</th>
+
+        {#each rankings as team}
+            <tr>
+                <td class="rank">{team.rank}</td>
+                <td class="user"><a href="#{team.teamName}">{team.teamName}</a></td>
+
+                <td class="score">{team.currentScore.toLocaleString("en-US")}</td>
+                <td class="score">{team.scoreGained.toLocaleString("en-US")}</td>
+
+                <td class="user">{team.player1.name}</td>
+                <td class="user">{team.player2.name}</td>
+            </tr>
+        {/each}
+    </table>
+{/if}
 
 <style>
     table {
         border-spacing: 0;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        margin: 10px auto;
+    }
+
+    th {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        padding: 4px;
+        background-color: #3a3a3a;
+        color: white;
     }
 
     tr:nth-child(2n) {
-        background: rgba(0,0,0,0.1);
+        background: rgba(0, 0, 0, 0.1);
     }
 
     td {
         padding: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     td.rank {
         font-weight: bold;
     }
 
-    td.rank, td.score {
+    td.rank,
+    td.score {
         text-align: right;
         font-family: monospace;
     }
@@ -51,17 +97,3 @@
         text-decoration: none;
     }
 </style>
-
-{#if user }
-    <CardWrapper {user} {rankings} />
-{:else}
-    <table>
-        {#each rankings as user, index}
-            <tr>
-                <td class="rank">#{index + 1}</td>
-                <td class="user"><a href="#{user.username}">{user.username}</a></td>
-                <td class="score">{user.gained_score.toLocaleString()}</td>
-            </tr>  
-        {/each}
-    </table>
-{/if}

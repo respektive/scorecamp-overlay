@@ -2,23 +2,23 @@
     import PlayerCard from "./PlayerCard.svelte";
     import ScoreDelta from "./ScoreDelta.svelte";
 
-    export let user;
+    export let team;
     export let rankings;
 </script>
 
 <div class="container">
     <div class="deltas">
-        {#if user.rank > 1}
-            <ScoreDelta main_user={user} compare_user={rankings[user.rank - 2]} />
+        {#if team.rank > 1}
+            <ScoreDelta main_user={team} compare_user={rankings[team.rank - 2]} />
         {/if}
-        {#if user.rank > 1 && rankings[user.rank]}
+        {#if team.rank > 1 && rankings[team.rank]}
             <div id="spacer" />
         {/if}
-        {#if rankings[user.rank]}
-            <ScoreDelta main_user={user} compare_user={rankings[user.rank]} />
+        {#if rankings[team.rank]}
+            <ScoreDelta main_user={team} compare_user={rankings[team.rank]} />
         {/if}
     </div>
-    <PlayerCard {user} />
+    <PlayerCard {team} />
 </div>
 
 <style>
@@ -41,10 +41,6 @@
         width: 0.1em;
         border: 0;
         margin: 0;
-        background: linear-gradient(
-            rgba(128, 128, 128, 0),
-            rgba(255, 255, 255, 0.3),
-            rgba(128, 128, 128, 0)
-        );
+        background: linear-gradient(rgba(128, 128, 128, 0), rgba(255, 255, 255, 0.3), rgba(128, 128, 128, 0));
     }
 </style>
