@@ -20,7 +20,7 @@
         <hr />
         <p id="gained">{$gainedScore}</p>
     </div>
-    <p id="rank" style="--rank-colour: {getRankColour(team.rank.replace('#', ''))};">{team.rank}</p>
+    <p id="rank" style="--rank-colour: {getRankColour(team.rank)};">#{team.rank}</p>
 </div>
 
 <style>
