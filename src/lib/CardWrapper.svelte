@@ -4,8 +4,6 @@
 
     export let team;
     export let rankings;
-
-    team.rank = parseInt(String(team.rank).replace("#", ""));
 </script>
 
 <div class="container">

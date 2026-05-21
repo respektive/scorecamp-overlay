@@ -11,7 +11,6 @@
     $: score.set(team.scoreGained);
 
     export let team;
-    console.log(team);
 </script>
 
 <div class="card" style="--card-hue: {$cardHue};">

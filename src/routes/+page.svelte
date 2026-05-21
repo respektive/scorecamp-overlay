@@ -20,15 +20,9 @@
         };
     });
 
-    console.log(data);
-
     $: teamName = decodeURIComponent($url.hash.substring(1).toLowerCase());
     $: team = teamName ? data.rankings.find((t) => t.teamName.toLowerCase() === teamName) : null;
-    $: rankings = data.rankings.map((t) => ({
-        ...t,
-        scoreGained: parseInt(String(t.scoreGained).replace(/,/g, "")),
-        currentScore: parseInt(String(t.currentScore).replace(/,/g, "")),
-    }));
+    $: rankings = data.rankings;
 </script>
 
 {#if team}
