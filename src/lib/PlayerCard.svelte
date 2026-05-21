@@ -11,10 +11,18 @@
     $: score.set(team.scoreGained);
 
     export let team;
+    console.log(team);
 </script>
 
 <div class="card" style="--card-hue: {$cardHue};">
-    <div id="avatar" style="background-image: url(https://a.ppy.sh/{1});" />
+    <!-- <div id="avatar" style="background-image: url(https://a.ppy.sh/{1});" /> -->
+
+    <div class="avatar-wrapper">
+        <div class="avatar p1" style="background-image: url(https://a.ppy.sh/{team.player1.id})"></div>
+        <div class="avatar p2" style="background-image: url(https://a.ppy.sh/{team.player2.id})"></div>
+        <div class="slash-line"></div>
+    </div>
+
     <div class="stats">
         <p id="username">{team.teamName}</p>
         <hr />
@@ -87,11 +95,35 @@
         filter: drop-shadow(0.05em 0.05em 0.05em rgba(0, 0, 0, 0.5));
     }
 
-    #avatar {
+    .avatar-wrapper {
         margin: 1em;
-        border-radius: 3em;
         background-repeat: no-repeat;
         background-size: contain;
         aspect-ratio: 1;
+        position: relative;
+    }
+
+    .avatar {
+        border-radius: 3em;
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .p2 {
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .slash-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 129%;
+        background: white;
+        transform: rotate(45deg) translateY(-123px) translateX(68px);
+        box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.8);
+        z-index: 5;
     }
 </style>
