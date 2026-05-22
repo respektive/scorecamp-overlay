@@ -32,7 +32,8 @@
     }
 
     .delta {
-        padding: 1em;
+        max-width: 45%;
+        padding: 1em 2em;
         position: relative;
         font-size: calc(min(100vw, 1200px) / 100);
         font-weight: 800;
@@ -44,7 +45,10 @@
     }
 
     #username {
-        font-size: 4em;
+        font-size: 3em;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     #score {

@@ -118,17 +118,18 @@
     }
 
     .p2 {
-        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
     }
 
     .slash-line {
         position: absolute;
         top: 0;
         left: 0;
-        width: 2px;
+        width: 0.2em;
         height: 129%;
         background: white;
-        transform: rotate(45deg) translateY(-123px) translateX(68px);
+        transform: rotate(45deg) translateY(-9em) translateX(5em);
         box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.8);
         z-index: 5;
     }
