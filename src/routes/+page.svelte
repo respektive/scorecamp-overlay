@@ -36,7 +36,12 @@
         <th>Score Gained</th>
 
         <th>Player 1</th>
+        <th>Score Gained</th>
+        <th>Contributed</th>
+
         <th>Player 2</th>
+        <th>Score Gained</th>
+        <th>Contributed</th>
 
         {#each rankings as team}
             <tr>
@@ -44,10 +49,15 @@
                 <td class="user"><a href="#{team.teamName}">{team.teamName}</a></td>
 
                 <td class="score">{team.currentScore.toLocaleString("en-US")}</td>
-                <td class="score">{team.scoreGained.toLocaleString("en-US")}</td>
+                <td class="score gained">{team.scoreGained.toLocaleString("en-US")}</td>
 
                 <td class="user">{team.player1.name}</td>
+                <td class="score">{team.player1.scoreGained.toLocaleString("en-US")}</td>
+                <td class="score">{team.player1.contribution}</td>
+
                 <td class="user">{team.player2.name}</td>
+                <td class="score">{team.player2.scoreGained.toLocaleString("en-US")}</td>
+                <td class="score">{team.player2.contribution}</td>
             </tr>
         {/each}
     </table>
@@ -85,6 +95,10 @@
     td.score {
         text-align: right;
         font-family: monospace;
+    }
+
+    td.gained {
+        font-weight: bold;
     }
 
     td.user a {
