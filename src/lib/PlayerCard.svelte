@@ -8,14 +8,20 @@
     const gainedScore = derived(score, ($score) => Math.round($score).toLocaleString("en-US"));
     const cardHue = derived(score, ($score) => ($score / 1000000) % 360);
 
+    const getFontSize = (name) => {
+        let fontSize = "6em";
+        if (name.length > 22) fontSize = "4.5em";
+        if (name.length >= 30) fontSize = "3.5em";
+        console.log(fontSize);
+        return fontSize;
+    };
+
     $: score.set(team.scoreGained);
 
     export let team;
 </script>
 
 <div class="card" style="--card-hue: {$cardHue};">
-    <!-- <div id="avatar" style="background-image: url(https://a.ppy.sh/{1});" /> -->
-
     <div class="avatar-wrapper">
         <div class="avatar p1" style="background-image: url(https://a.ppy.sh/{team.player1.id})"></div>
         <div class="avatar p2" style="background-image: url(https://a.ppy.sh/{team.player2.id})"></div>
@@ -23,7 +29,7 @@
     </div>
 
     <div class="stats">
-        <p id="username">{team.teamName}</p>
+        <p id="username" style="--font-size: {getFontSize(team.teamName)};">{team.teamName}</p>
         <hr />
         <p id="gained">{$gainedScore}</p>
     </div>
@@ -83,7 +89,8 @@
     }
 
     #username {
-        font-size: 6em;
+        --font-size: 6em;
+        font-size: var(--font-size);
         font-weight: 600;
         filter: drop-shadow(0.05em 0.05em 0.05em rgba(0, 0, 0, 0.5));
     }
