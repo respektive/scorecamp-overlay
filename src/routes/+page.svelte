@@ -44,7 +44,7 @@
         <th>Contributed</th>
 
         {#each rankings as team}
-            <tr>
+            <tr class:eliminated={team.eliminated}>
                 <td class="rank">{team.rank}</td>
                 <td class="user"><a href="#{team.teamName}">{team.teamName}</a></td>
 
@@ -80,6 +80,14 @@
 
     tr:nth-child(2n) {
         background: rgba(0, 0, 0, 0.1);
+    }
+
+    tr.eliminated {
+        background: rgba(128, 0, 0, 0.5);
+    }
+
+    tr.eliminated a {
+        color: #3f4a70;
     }
 
     td {
