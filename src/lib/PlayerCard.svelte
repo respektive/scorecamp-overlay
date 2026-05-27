@@ -3,6 +3,7 @@
     import { derived } from "svelte/store";
     import { tweenSettings, getRankColour } from "$lib/constants";
 
+    const currentTime = Date.now();
     const score = tweened(0, tweenSettings);
 
     const gainedScore = derived(score, ($score) => Math.round($score).toLocaleString("en-US"));
@@ -23,8 +24,8 @@
 
 <div class="card" style="--card-hue: {$cardHue};">
     <div class="avatar-wrapper">
-        <div class="avatar p1" style="background-image: url(https://a.ppy.sh/{team.player1.id})"></div>
-        <div class="avatar p2" style="background-image: url(https://a.ppy.sh/{team.player2.id})"></div>
+        <div class="avatar p1" style="background-image: url(https://a.ppy.sh/{team.player1.id}?{currentTime})"></div>
+        <div class="avatar p2" style="background-image: url(https://a.ppy.sh/{team.player2.id}?{currentTime})"></div>
         <div class="slash-line"></div>
     </div>
 
