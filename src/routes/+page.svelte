@@ -46,16 +46,16 @@
         {#each rankings as team}
             <tr class:eliminated={team.eliminated}>
                 <td class="rank">{team.rank}</td>
-                <td class="user"><a href="#{team.teamName}">{team.teamName}</a></td>
+                <td class="team"><a href="#{team.teamName}">{team.teamName}</a></td>
 
                 <td class="score">{team.currentScore.toLocaleString("en-US")}</td>
                 <td class="score gained">{team.scoreGained.toLocaleString("en-US")}</td>
 
-                <td class="user">{team.player1.name}</td>
+                <td class="user"><a href="https://osu.ppy.sh/users/{team.player1.id}" target="_blank">{team.player1.name}</a></td>
                 <td class="score">{team.player1.scoreGained.toLocaleString("en-US")}</td>
                 <td class="score">{team.player1.contribution}</td>
 
-                <td class="user">{team.player2.name}</td>
+                <td class="user"><a href="https://osu.ppy.sh/users/{team.player2.id}" target="_blank">{team.player2.name}</a></td>
                 <td class="score">{team.player2.scoreGained.toLocaleString("en-US")}</td>
                 <td class="score">{team.player2.contribution}</td>
             </tr>
@@ -109,7 +109,16 @@
         font-weight: bold;
     }
 
+    td.team a {
+        text-decoration: none;
+    }
+
     td.user a {
         text-decoration: none;
+        color: black;
+    }
+
+    td a:hover {
+        text-decoration: underline;
     }
 </style>
