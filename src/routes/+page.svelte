@@ -7,13 +7,13 @@
 
     export let data;
 
-    // 10 seconds in dev mode, 60 secs in prod
-    const REFRESH_INTERVAL = (dev ? 10 : 60) * 1000;
+    // 10 seconds in dev mode, 30 secs in prod
+    const REFRESH_INTERVAL = (dev ? 10 : 30) * 1000;
 
     onMount(() => {
         const interval = setInterval(() => {
             invalidate("data:rankings");
-        }, REFRESH_INTERVAL); // 1 minute
+        }, REFRESH_INTERVAL);
 
         return () => {
             clearInterval(interval);
